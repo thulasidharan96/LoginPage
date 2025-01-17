@@ -14,7 +14,7 @@ To get started with the project, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/login_page.git
+    git clone https://github.com/thulasidharan96/login_page.git
     ```
 2. **Navigate to the project directory**:
     ```bash
