@@ -4,19 +4,48 @@ import { Link } from 'react-router-dom';
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
+
+        const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        const user = storedUsers.find(
+            (user) => user.email === email && user.password === password
+        );
+
+        if (user) {
+            setMessage('Login successful!');
+        } else {
+            setMessage('Invalid email or password.');
+        }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8" style={{backgroundImage: "url('/1.jpg')", backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div
+            className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+            style={{
+                backgroundImage: "url('/1.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+        >
             <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                     Login
                 </h2>
+                {message && (
+                    <p
+                        className={`text-center mt-4 text-sm ${
+                            message === 'Login successful!'
+                                ? 'text-green-600'
+                                : 'text-red-600'
+                        }`}
+                    >
+                        {message}
+                    </p>
+                )}
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
@@ -55,7 +84,10 @@ const LoginPage = () => {
                     </div>
                 </form>
                 <div className="text-center">
-                    <Link to="/register" className="text-indigo-600 hover:text-indigo-500">
+                    <Link
+                        to="/register"
+                        className="text-indigo-600 hover:text-indigo-500"
+                    >
                         Don't have an account? Register here
                     </Link>
                 </div>

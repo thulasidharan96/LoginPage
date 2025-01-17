@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Card from "../components/Card";
+import { logout } from "../auth/auth";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -13,10 +14,9 @@ const DashBoard = () => {
     }
   }, [navigate]);
 
-  const handleLogOut = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    navigate("/login");
+  const handleLogOut = () => {
+    logout();
+    navigate("/");
   };
 
   return (
