@@ -9,6 +9,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  const currentDateTime = new Date().toLocaleString();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const LoginPage = () => {
         const token = "dummy_token";
         dispatch(setLogin({ token, user: storedData }));
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem('LastLogin', currentDateTime);
         navigate("/dashboard");
       } else {
         setErrorMessage("Invalid email or password. Please try again.");

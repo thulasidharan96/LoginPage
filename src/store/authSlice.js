@@ -1,5 +1,10 @@
-// src/store/authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+
+// Helper function to create a time-based token
+const generateToken = (email) => {
+  const timestamp = Date.now();
+  return btoa(`${email}`);
+};
 
 const initialState = {
   token: null,
@@ -12,7 +17,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setLogin: (state, action) => {
-      state.token = action.payload.token;
+      const { email } = action.payload.user;
+      const token = generateToken(email);
+      
+      state.token = token;
       state.isAuthenticated = true;
       state.user = action.payload.user;
     },
