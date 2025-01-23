@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Helper function to create a time-based token
 const generateToken = (email) => {
-  const timestamp = Date.now();
   return btoa(`${email}`);
 };
 
